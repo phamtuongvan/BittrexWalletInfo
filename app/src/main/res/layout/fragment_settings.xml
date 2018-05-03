@@ -1,0 +1,39 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="pamobile.co.bittrexwalletinfo.Settings.SettingsFragment">
+
+    <LinearLayout
+        android:id="@+id/lnTop"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/btnNofTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Notify Time" />
+        <Button
+            android:id="@+id/btnDeltaPercent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Delta percent" />
+        <Button
+            android:id="@+id/btnAPI"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="API" />
+    </LinearLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rcvSettings"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/lnTop" />
+</RelativeLayout>

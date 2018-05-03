@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="true"
+        jar="/Users/admin/.android/build-cache/79e858b98d26f348d0195bda60a8d027dcb94821/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.0"
+        sha1="47471eb19df288158b00b8d9cfa41bce7373f5cc">
+        <dex dex="/Users/admin/Downloads/android-samples-master/BittrexWalletInfo/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_628f3799e1c90b6dc67a43a9700f78b50e1fbd0a/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/admin/.gradle/caches/modules-2/files-2.1/com.google.dagger/dagger/2.9/75a739e59d7ede2f7f425f369955bdd1c2ac122b/dagger-2.9.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.0"
+        sha1="75a739e59d7ede2f7f425f369955bdd1c2ac122b">
+        <dex dex="/Users/admin/Downloads/android-samples-master/BittrexWalletInfo/app/build/intermediates/transforms/dex/debug/folders/1000/10/dagger-2.9_f25486d21b549cd60135a59165d057ba02ad8daa/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/admin/.android/build-cache/7d1c556e0cb2b4cf17f064297d3dc232f6528745/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.0"
+        sha1="cddcd0fb93bc70e27325f2f715b2710332004ebb">
+        <dex dex="/Users/admin/Downloads/android-samples-master/BittrexWalletInfo/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_baf325bf4e4f32b5ce48c5656379d3c0effb7db9/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/admin/.android/build-cache/c3deec00331c915d604c23c8790aafe59de640d0/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.0"
+        sha1="8df0e365e40beb151bc42dee20817721a6cab7b0">
+        <dex dex="/Users/admin/Downloads/android-samples-master/BittrexWalletInfo/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_9bed2013d58308b5c125625cadf5601723b4a91c/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/admin/.gradle/caches/modules-2/files-2.1/com.google.code.gson/gson/2.8.1/2a8e0aa38a2e21cb39e2f5a7d6704cbdc941da0/gson-2.8.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.0"
+        sha1="02a8e0aa38a2e21cb39e2f5a7d6704cbdc941da0">
+        <dex dex="/Users/admin/Downloads/android-samples-master/BittrexWalletInfo/app/build/intermediates/transforms/dex/debug/folders/1000/10/gson-2.8.1_b1ebb0848812cbc22b24e9f141d3fd3aa254bcb2/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/admin/Downloads/android-samples-master/BittrexWalletInfo/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.0"
+        sha1="16590a271db0c4312c3367072db1541156bc1792">
+        <dex dex="/Users/admin/Downloads/android-samples-master/BittrexWalletInfo/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run-bootstrap_36ed7c36330a565210a55ec5e3d393038b5acf07/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/admin/.android/build-cache/8cf7f40708bf4102585243b3b5d629695f19c16f/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.0"
+        sha1="2e92aa0163544a804a0b34f169ca61801770839a">
+        <dex dex="/Users/admin/Downloads/android-samples-master/BittrexWalletInfo/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_c5d35acfbc00bb7c67e769d99f59bf1ac658a68f/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/admin/Downloads/android-samples-master/BittrexWalletInfo/app/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.0"
+        sha1="3be78ebc2706b2e1fe2f12d5726887a92d6c183b">
+        <dex dex="/Users/admin/Downloads/android-samples-master/BittrexWalletInfo/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run_948b6efdb064d514d55533de1b762a9d1b9f0d23/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/admin/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/26.0.0-alpha1/support-annotations-26.0.0-alpha1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.0"
+        sha1="023ee503b631f69511e335a061ea008f8da60f40">
+        <dex dex="/Users/admin/Downloads/android-samples-master/BittrexWalletInfo/app/build/intermediates/transforms/dex/debug/folders/1000/10/support-annotations-26.0.0-alpha1_d3037d6ec2dc46d38c1044c1152b750e15b51318/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/admin/.android/build-cache/ea21458733b59bab9321e61e6f53f56944100cf9/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.0"
+        sha1="9935891f23923f39d002087085d9696568a9f657">
+        <dex dex="/Users/admin/Downloads/android-samples-master/BittrexWalletInfo/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_270c674a811d2433aa2d5bc364ad7ae98525cb8b/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/admin/.android/build-cache/f81990e121cd06c6f55c9bf56cc8c13fa49efbb9/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.0"
+        sha1="18d31838aa4fcc768a8a0516e22cc13b94655d89">
+        <dex dex="/Users/admin/Downloads/android-samples-master/BittrexWalletInfo/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_a686a30a944b68a3fd7c738c5f46c49085d37621/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/admin/.gradle/caches/modules-2/files-2.1/com.jakewharton/butterknife-annotations/8.1.0/d6854f42bfb4098d3d2358d93201307b9f1cc95d/butterknife-annotations-8.1.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.0"
+        sha1="d6854f42bfb4098d3d2358d93201307b9f1cc95d">
+        <dex dex="/Users/admin/Downloads/android-samples-master/BittrexWalletInfo/app/build/intermediates/transforms/dex/debug/folders/1000/10/butterknife-annotations-8.1.0_2d9c3411deaa2fa2cd99183f013845dbee1324ed/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/admin/.android/build-cache/86a25d8e1f45e4dbe1910d16880d5cce0a5b478b/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.0"
+        sha1="d4ab8678882571a0a6f19c47a826ecbce5b4f42b">
+        <dex dex="/Users/admin/Downloads/android-samples-master/BittrexWalletInfo/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_d5a611d95c739d5179755240452017426e309835/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/admin/.gradle/caches/modules-2/files-2.1/javax.inject/javax.inject/1/6975da39a7040257bd51d21a231b76c915872d38/javax.inject-1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.0"
+        sha1="6975da39a7040257bd51d21a231b76c915872d38">
+        <dex dex="/Users/admin/Downloads/android-samples-master/BittrexWalletInfo/app/build/intermediates/transforms/dex/debug/folders/1000/10/javax.inject-1_d082dc14909ece9d78a55c3d1c2ea134216e75c3/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/admin/.android/build-cache/9b7a04822015c3ae38236027666b2dd7fc9d0a59/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.0"
+        sha1="88246166d5afb106f532f6e6deae683c66b42c89">
+        <dex dex="/Users/admin/Downloads/android-samples-master/BittrexWalletInfo/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_704fe67215eb0fa4d870a7e54e9c7213de63a46c/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/admin/.android/build-cache/62166b5b6f0f4fe87795dd1864abcf3ac369d30b/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.0"
+        sha1="952944218ecedea1554a513dec0c14d570642843">
+        <dex dex="/Users/admin/Downloads/android-samples-master/BittrexWalletInfo/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_4f727f4a09fa4bdc8ff10b50bb5d37e5631672a1/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/admin/.android/build-cache/51b5b9b8ffd581c808d7656432364ac6d74e6c9c/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.0"
+        sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
+        <dex dex="/Users/admin/Downloads/android-samples-master/BittrexWalletInfo/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_4de8d6b8f8319fb339c2cb8295f3837ab2f1609c/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/admin/.android/build-cache/c17f735a7c8b482a8ab879527d3a434d51f1a6d8/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.0"
+        sha1="6a022bf00ccd0948a8180c505e8e458bbddd43a6">
+        <dex dex="/Users/admin/Downloads/android-samples-master/BittrexWalletInfo/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_77782c57b1da9bd95a6f6b7fbbe043142cc25d3b/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/admin/.android/build-cache/1dd03860688bc0fa5f68cccb644c96f0cdff13d4/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.0"
+        sha1="2cd4b982617e544728de0782d718a58ce1b06e3f">
+        <dex dex="/Users/admin/Downloads/android-samples-master/BittrexWalletInfo/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_b3cee0d38633446088e0da9b7ef6c484e6f4f0fc/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/admin/Library/Android/sdk/extras/m2repository/com/android/support/constraint/constraint-layout-solver/1.0.2/constraint-layout-solver-1.0.2.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.0"
+        sha1="b9cd8fc6bd15cb915735d34535db30ece0c44603">
+        <dex dex="/Users/admin/Downloads/android-samples-master/BittrexWalletInfo/app/build/intermediates/transforms/dex/debug/folders/1000/10/constraint-layout-solver-1.0.2_1d7f3ea28b5d749dc1e4f9a2bf614f323969fb2f/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/admin/.android/build-cache/6cbb9755995c8147e7b8d7c72167235e2c21e995/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.0"
+        sha1="44ee06abb66da30f5855e6bf54574e64cdcd982a">
+        <dex dex="/Users/admin/Downloads/android-samples-master/BittrexWalletInfo/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_f20a650123794576c7b378cff1dcbc5bcb68cc29/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/admin/.android/build-cache/d13d6c90738457ae10f81aa1893c78266ed92c40/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.0"
+        sha1="c4f45092eee6cdf1a5dbd597b2b6819be652ce2e">
+        <dex dex="/Users/admin/Downloads/android-samples-master/BittrexWalletInfo/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_26d543260c2c9646d136937a8bfd9bd043f88ea5/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/admin/.android/build-cache/2dd4225599eb1c331e0129c743924d0f79eb4d34/output/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="26.0.0"
+        sha1="fcd01fd11233459f546c437ec927e9b61bf7caf1">
+        <dex dex="/Users/admin/Downloads/android-samples-master/BittrexWalletInfo/app/build/intermediates/transforms/dex/debug/folders/1000/10/classes_9a0d40dd2a0c7bc14df9e0afd0fc7def65fa36d2/classes.dex" />
+    </item>
+
+</items>

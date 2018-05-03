@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:weightSum="1">
+
+    <TextView
+        android:id="@+id/txtSymbol"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.12"
+        android:textSize="12sp"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="GRS" />
+
+    <LinearLayout
+        android:orientation="vertical" android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_weight="0.20">
+        <TextView
+            android:id="@+id/txtSumTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:text="Tong" />
+        <TextView
+            android:id="@+id/txtAvailableTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:text="Kha dung" />
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="vertical" android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_weight="0.4">
+        <TextView
+            android:id="@+id/txtSum"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:text="Tong" />
+        <TextView
+            android:id="@+id/txtAvailable"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:text="Kha dung" />
+    </LinearLayout>
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.32"
+        android:id="@+id/txtEstUsdt"
+        android:textSize="12sp"
+        android:layout_gravity="center_vertical"
+        android:text="100 USDT"/>
+</LinearLayout>
