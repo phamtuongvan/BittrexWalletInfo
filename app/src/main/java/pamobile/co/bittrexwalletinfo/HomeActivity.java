@@ -2,6 +2,7 @@ package pamobile.co.bittrexwalletinfo;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
@@ -20,6 +21,7 @@ import android.view.MenuItem;
 import pamobile.co.bittrexwalletinfo.CryptoEvents.CryptoEventFragment;
 import pamobile.co.bittrexwalletinfo.Service.BackgroundService;
 import pamobile.co.bittrexwalletinfo.Settings.SettingsFragment;
+import pamobile.co.bittrexwalletinfo.Trade.TradeFragment;
 import pamobile.co.bittrexwalletinfo.Wallet.WalletFragment;
 
 public class HomeActivity extends AppCompatActivity
@@ -27,6 +29,7 @@ public class HomeActivity extends AppCompatActivity
     SettingsFragment settingsFragment = new SettingsFragment();
     WalletFragment walletFragment = new WalletFragment();
     CryptoEventFragment cryptoEventFragment = new CryptoEventFragment();
+    TradeFragment tradeFragment = new TradeFragment();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,6 +56,7 @@ public class HomeActivity extends AppCompatActivity
 
 
     }
+    boolean doubleBackToExitPressedOnce = false;
 
     @Override
     public void onBackPressed() {
@@ -60,7 +64,27 @@ public class HomeActivity extends AppCompatActivity
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            super.onBackPressed();
+            FragmentManager fm = getSupportFragmentManager();
+            FragmentTransaction ft = fm.beginTransaction();
+            Fragment currentFragment = fm.findFragmentById(R.id.content);
+            if(!(currentFragment instanceof WalletFragment)){
+                super.onBackPressed();
+            }else {
+                if (doubleBackToExitPressedOnce) {
+                   finish();
+                }
+                this.doubleBackToExitPressedOnce = true;
+
+
+                new Handler().postDelayed(new Runnable() {
+
+                    @Override
+                    public void run() {
+                        doubleBackToExitPressedOnce=false;
+                    }
+                }, 2000);
+            }
+
         }
     }
 
@@ -116,6 +140,17 @@ public class HomeActivity extends AppCompatActivity
 
                 ft.add(R.id.content, walletFragment, WalletFragment.class.getSimpleName());
                 ft.addToBackStack(WalletFragment.class.getSimpleName());
+                ft.commit();
+            }
+            // Handle the camera action
+        }else if (id == R.id.nav_trade) {
+            if (!(currentFragment instanceof TradeFragment)) {
+                if(currentFragment != null){
+                    ft.remove(currentFragment);
+                }
+
+                ft.add(R.id.content, tradeFragment, TradeFragment.class.getSimpleName());
+                ft.addToBackStack(TradeFragment.class.getSimpleName());
                 ft.commit();
             }
             // Handle the camera action

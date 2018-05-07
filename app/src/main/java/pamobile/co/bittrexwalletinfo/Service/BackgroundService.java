@@ -14,8 +14,10 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 
-import java.io.FileNotFoundException;
+import java.time.Instant;
+import java.util.Date;
 import java.util.List;
+import java.util.TimeZone;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -51,7 +53,8 @@ public class BackgroundService extends Service {
             mTimer.cancel();
         else
             mTimer = new Timer();   //recreate new
-        mTimer.scheduleAtFixedRate(new TimeDisplay(), 0, sharedPreference.getTimeNotify());   //Schedule task
+        Log.e("EEE",sharedPreference.getTimeNotify()*1000 +" mili giay");
+        mTimer.scheduleAtFixedRate(new TimeDisplay(), 0, sharedPreference.getTimeNotify()*1000);   //Schedule task
     }
 
     @Override
@@ -70,6 +73,7 @@ public class BackgroundService extends Service {
                 @SuppressLint("StaticFieldLeak")
                 @Override
                 public void run() {
+                    final long currentTime = new Date().getTime();
                     // display toast
                     new AsyncTask<Object,Object,Bittrex>() {
                         @Override
@@ -79,27 +83,46 @@ public class BackgroundService extends Service {
                             //String balanceJson = bittrex.getBalances();
                             SharedPreference sharedPreference = new SharedPreference(getBaseContext());
                             List<String> follows = sharedPreference.getFollows();
+                            long deltaTime = sharedPreference.getLastTickerTime() - currentTime;
+                            int roundTime = Math.abs(Math.round(deltaTime/1000.0f));
                             for (String follow:follows) {
                                 try {
-                                    String tickerAda = localDataService.GetBittrexAPI(getApplicationContext()).getTicker(follow);
-                                    Ticker ticker = gson.fromJson(tickerAda, GetTickerContainer.class).getTicker();
-                                    if(sharedPreference.getTickers(follow).size() >= 1){
+                                    String tickerContainer = localDataService.GetBittrexAPI(getApplicationContext()).getTicker(follow);
+                                    Ticker ticker = gson.fromJson(tickerContainer, GetTickerContainer.class).getTicker();
+                                    if(sharedPreference.getTickers(follow).size() >= 1 && roundTime == sharedPreference.getTimeNotify()){
                                         Ticker lastTicker = sharedPreference.getTickers(follow).get(sharedPreference.getTickers(follow).size()-1);
                                         double delta = ticker.getLast() - lastTicker.getLast();
-                                        double percent = (float) (delta/lastTicker.getLast() * 100);
-                                        Log.e("EEE",""+percent);
+                                        double percent = (delta/lastTicker.getLast() * 100);
+                                        String currentP = String.format("%1$,.8f",ticker.getLast());
+                                        String lastP = String.format("%1$,.8f",lastTicker.getLast());
                                         if(percent > sharedPreference.getDeltaPercent()){
-                                            createNotification(follow+" Current price compare with "+sharedPreference.getTimeNotify()/1000+" s before",String.format("%1$,.8f increased ",delta)+String.format("%1$,.2f % ",percent));
+                                            String a = String.format("%1$,.8f",delta);
+                                            String b = String.format("%1$,.2f",percent);
+                                            Log.e("EEEA",a);
+                                            Log.e("EEEB",b);
+                                            String content =follow+": "+ a +" increased "+ b + " %";
+                                            Log.e("EEEcontent",content);
+                                            Log.e("mNotificationId",follow +": "+follow.hashCode() );
+                                            createNotification(follow.hashCode(),"Current price:"+currentP+", "+sharedPreference.getTimeNotify()+"s before price:"+lastP,content);
                                         }else if(percent < -sharedPreference.getDeltaPercent()){
-                                            createNotification(follow+" Current price compare with "+sharedPreference.getTimeNotify()/1000+" s before",String.format("%1$,.8f decreased ",delta)+String.format("%1$,.2f % ",percent));
+                                            String a = String.format("%1$,.8f",delta);
+                                            String b = String.format("%1$,.2f",percent);
+                                            Log.e("EEEA",a);
+                                            Log.e("EEEB",b);
+                                            String content =follow+": "+ a +" decreased "+ b + " %";
+                                            Log.e("EEEcontent",content);
+                                            Log.e("mNotificationId",follow +": "+follow.hashCode() );
+                                            createNotification(follow.hashCode(),"Current price:"+currentP+", "+sharedPreference.getTimeNotify()+"s before price:"+lastP,content);
                                         }
                                         //createNotification("Current price compare with 15 seconds before",String.format("%1$,.8f ",delta));
                                     }
+
                                     sharedPreference.addTicker(ticker,follow);
-                                }catch (NullPointerException ignored){
+                                }catch (Exception ignored){
                                     Log.e("EEEE",ignored.getMessage());
                                 }
                             }
+                            sharedPreference.saveLastTickerTime(currentTime);
                             return localDataService.GetBittrexAPI(getApplicationContext());
                         }
 
@@ -113,12 +136,11 @@ public class BackgroundService extends Service {
         }
     }
 
-    public void createNotification(String title,String content) {
+    public void createNotification(int mNotificationId,String content,String title) {
         // Prepare intent which is triggered if the
         // notification is selected
         Intent intent = new Intent(this, HomeActivity.class);
         PendingIntent pIntent = PendingIntent.getActivity(this, (int) System.currentTimeMillis(), intent, 0);
-
         // Build notification
         // Actions are just fake
         NotificationCompat.Builder mBuilder =
@@ -129,7 +151,7 @@ public class BackgroundService extends Service {
         mBuilder.setContentIntent(pIntent);
 
         // Sets an ID for the notification
-        int mNotificationId = 001;
+
 // Gets an instance of the NotificationManager service
         NotificationManager mNotifyMgr =
                 (NotificationManager) getSystemService(NOTIFICATION_SERVICE);

@@ -38,7 +38,7 @@ public abstract class ProgressAsyncTask extends AsyncTask<Integer, Integer, Void
     @Override
     protected void onProgressUpdate(Integer... values) {
         super.onProgressUpdate(values);
-        progressDialog.show();
+        //progressDialog.show();
     }
 
     @Override

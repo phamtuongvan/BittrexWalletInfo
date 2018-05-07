@@ -95,7 +95,7 @@ public class SharedPreference {
         Gson gson = new Gson();
         String project = gson.toJson(tickers);
         editor.putString(FOLLOW_NAME, project);
-        editor.commit();
+        editor.apply();
     }
 
     public ArrayList<String> getFollows() {
@@ -161,7 +161,7 @@ public class SharedPreference {
                 Context.MODE_PRIVATE);
         editor = settings.edit();
         editor.putInt("NOTIFY_TIME",time);
-        editor.commit();
+        editor.apply();
     }
 
     public int getTimeNotify() {
@@ -170,10 +170,9 @@ public class SharedPreference {
         settings = context.getSharedPreferences(PREFS_NAME,
                 Context.MODE_PRIVATE);
         if (settings.contains("NOTIFY_TIME")) {
-            int time = settings.getInt("NOTIFY_TIME", 30000);
-            return time;
+            return settings.getInt("NOTIFY_TIME", 30);
         }
-        return 30000;
+        return 30;
     }
 
     public void saveDeltaPercent(float time) {
@@ -183,7 +182,7 @@ public class SharedPreference {
                 Context.MODE_PRIVATE);
         editor = settings.edit();
         editor.putFloat("DeltaPercent",time);
-        editor.commit();
+        editor.apply();
     }
 
     public float getDeltaPercent() {
@@ -192,8 +191,7 @@ public class SharedPreference {
         settings = context.getSharedPreferences(PREFS_NAME,
                 Context.MODE_PRIVATE);
         if (settings.contains("DeltaPercent")) {
-            float DeltaPercent = settings.getFloat("DeltaPercent", 5);
-            return DeltaPercent;
+            return settings.getFloat("DeltaPercent", 5);
         }
         return 5;
     }
@@ -206,7 +204,7 @@ public class SharedPreference {
         editor = settings.edit();
         editor.putString("ApiKey",userApiKey);
         editor.putString("Secret",userSecret);
-        editor.commit();
+        editor.apply();
     }
 
     public String[] getApi() {
@@ -215,10 +213,31 @@ public class SharedPreference {
         settings = context.getSharedPreferences(PREFS_NAME,
                 Context.MODE_PRIVATE);
         if (settings.contains("ApiKey") && settings.contains("Secret")) {
-            String[] api = new String[]{settings.getString("ApiKey",null),settings.getString("Secret",null)};
-            return api;
+            return new String[]{settings.getString("ApiKey",null),settings.getString("Secret",null)};
         }
         return new String[]{UserCredentials.userApiKey,UserCredentials.userSecret};
+    }
+
+
+    public void saveLastTickerTime(long time) {
+        SharedPreferences settings;
+        SharedPreferences.Editor editor;
+        settings = context.getSharedPreferences(PREFS_NAME,
+                Context.MODE_PRIVATE);
+        editor = settings.edit();
+        editor.putLong("LastTickerTime",time);
+        editor.apply();
+    }
+
+    public long getLastTickerTime() {
+        SharedPreferences settings;
+        SharedPreferences.Editor editor;
+        settings = context.getSharedPreferences(PREFS_NAME,
+                Context.MODE_PRIVATE);
+        if (settings.contains("LastTickerTime")) {
+            return settings.getLong("LastTickerTime", 0);
+        }
+        return 0;
     }
 }
 

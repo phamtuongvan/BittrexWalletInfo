@@ -57,5 +57,5 @@
         android:id="@+id/txtEstUsdt"
         android:textSize="12sp"
         android:layout_gravity="center_vertical"
-        android:text="100 USDT"/>
+        android:text="0 USD"/>
 </LinearLayout>

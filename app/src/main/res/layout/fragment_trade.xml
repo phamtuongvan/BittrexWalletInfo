@@ -1,0 +1,51 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white">
+
+    <LinearLayout
+        android:id="@+id/lnTop"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:orientation="horizontal"
+        android:weightSum="3">
+
+        <Button
+            android:id="@+id/btnSell"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_margin="4dp"
+            android:background="@android:color/holo_blue_light"
+            android:textAppearance="?android:textAppearanceSmall"
+            android:textColor="@android:color/white"
+            android:layout_height="wrap_content"
+            android:text="SELL TO USDT" />
+
+        <Button
+            android:id="@+id/btnBuy"
+            android:layout_weight="1"
+            android:layout_margin="4dp"
+            android:layout_width="0dp"
+            android:background="@android:color/holo_blue_light"
+            android:textAppearance="?android:textAppearanceSmall"
+            android:textColor="@android:color/white"
+            android:layout_height="wrap_content"
+            android:text="BUY BTC" />
+
+        <Button
+            android:id="@+id/btnBot"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_margin="4dp"
+            android:background="@android:color/holo_blue_light"
+            android:textAppearance="?android:textAppearanceSmall"
+            android:textColor="@android:color/white"
+            android:layout_height="wrap_content"
+            android:text="Test Bot" />
+    </LinearLayout>
+
+</RelativeLayout>

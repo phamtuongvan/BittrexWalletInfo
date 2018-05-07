@@ -7,9 +7,9 @@
             android:icon="@drawable/ic_menu_camera"
             android:title="Wallet" />
         <item
-            android:id="@+id/nav_icoreview"
+            android:id="@+id/nav_trade"
             android:icon="@drawable/ic_menu_gallery"
-            android:title="ICO Review" />
+            android:title="Trade Coin" />
         <item
             android:id="@+id/nav_cryptoevent"
             android:icon="@drawable/ic_menu_slideshow"

@@ -42,6 +42,7 @@ public class SettingsAdapter extends RecycleViewAdapterPattern {
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         final SettingsViewHolder eventsViewHolder = (SettingsViewHolder) holder;
         final Market cryptoEvent = (Market) getDataSource().get(position);
+
         eventsViewHolder.txtMarketName.setText(cryptoEvent.getMarketName());
         if(sharedPreference.checkFollow(cryptoEvent.getMarketName())){
             eventsViewHolder.swFollow.setChecked(true);

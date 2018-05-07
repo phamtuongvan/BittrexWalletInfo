@@ -6,6 +6,7 @@ import pamobile.co.bittrexwalletinfo.CryptoEvents.CryptoEventFragment;
 import pamobile.co.bittrexwalletinfo.HomeActivity;
 import pamobile.co.bittrexwalletinfo.Service.BackgroundService;
 import pamobile.co.bittrexwalletinfo.Settings.SettingsFragment;
+import pamobile.co.bittrexwalletinfo.Trade.TradeFragment;
 import pamobile.co.bittrexwalletinfo.Wallet.WalletFragment;
 
 /**
@@ -22,4 +23,6 @@ public interface GeneralComponent {
     void Inject(WalletFragment walletFragment);
 
     void Inject(SettingsFragment settingsFragment);
+
+    void Inject(TradeFragment tradeFragment);
 }

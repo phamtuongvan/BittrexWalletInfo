@@ -1,5 +1,6 @@
 package pamobile.co.bittrexwalletinfo.CryptoEvents;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -15,8 +16,14 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.google.gson.Gson;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 import javax.inject.Inject;
@@ -39,6 +46,7 @@ public class CryptoEventFragment extends FragmentPattern {
     @BindView(R.id.rcvEvents)
     RecyclerView rcvEvents;
     CryptoEventAdapter cryptoEventAdapter;
+    ArrayList<CryptoEvent> cryptoEvents;
     public CryptoEventFragment() {
     }
 
@@ -64,23 +72,64 @@ public class CryptoEventFragment extends FragmentPattern {
         LinearLayoutManager mManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         rcvEvents.setLayoutManager(mManager);
         rcvEvents.setAdapter(cryptoEventAdapter);
-        loadNewsList();
+
+        if(cryptoEvents != null){
+            for (CryptoEvent event:cryptoEvents) {
+                String string = event.getStartDate();
+                if(string.split("-").length == 3 && !string.contains(":")){
+
+                    DateFormat format = new SimpleDateFormat("yyyy-m-dd", Locale.ENGLISH);
+                    try {
+                        Date date = format.parse(string);
+                        if(new Date().compareTo(date) == -1){
+                            Log.e("after true",string);
+                            cryptoEventAdapter.addDataSource(event);
+                        }
+                    } catch (ParseException e) {
+                        Log.e("ParseException",string);
+                        e.printStackTrace();
+                    }
+                }else{
+                    cryptoEventAdapter.addDataSource(event);
+                }
+            }
+        }else {
+            loadNewsList();
+        }
     }
 
     public void loadNewsList() {
-        final Gson gson = new Gson();
-        ProgressAsyncTask progressAsyncTask = new ProgressAsyncTask(getContext()) {
+        @SuppressLint("StaticFieldLeak") ProgressAsyncTask progressAsyncTask = new ProgressAsyncTask(getContext()) {
             @Override
             public void onDoing() {
                 RequestQueue queue = volleyService.getRequestQueue(getContext());
                 String parameterGet = "";
-                StringRequest stringRequest = new StringRequest(Request.Method.GET, "https://coindar.org/api/v1/events?Year=2018&Month=1&day=26",
+                Calendar calendar = Calendar.getInstance();
+                StringRequest stringRequest = new StringRequest(Request.Method.GET, "https://coindar.org/api/v1/events?Year="+calendar.get(Calendar.YEAR)+"&Month="+(calendar.get(Calendar.MONTH)+1),
                         new Response.Listener<String>() {
                             @Override
                             public void onResponse(String response) {
-                                ArrayList<CryptoEvent> cryptoEvents = ArrayConvert.toArrayList(JsonConvert.getArray(response,CryptoEvent[].class));
+                                cryptoEventAdapter.clearDataSource();
+                                cryptoEvents = ArrayConvert.toArrayList(JsonConvert.getArray(response,CryptoEvent[].class));
+                                Log.e("TODAY",new Date().toString());
                                 for (CryptoEvent event:cryptoEvents) {
-                                    cryptoEventAdapter.addDataSource(event);
+                                    String string = event.getStartDate();
+                                    if(string.split("-").length == 3 && !string.contains(":")){
+
+                                        DateFormat format = new SimpleDateFormat("yyyy-m-dd", Locale.ENGLISH);
+                                        try {
+                                            Date date = format.parse(string);
+                                            if(new Date().compareTo(date) == -1){
+                                                Log.e("after true",string);
+                                                cryptoEventAdapter.addDataSource(event);
+                                            }
+                                        } catch (ParseException e) {
+                                            Log.e("ParseException",string);
+                                            e.printStackTrace();
+                                        }
+                                    }else{
+                                        cryptoEventAdapter.addDataSource(event);
+                                    }
                                 }
                                 Log.e("EEE",cryptoEvents.size() +"");
                             }

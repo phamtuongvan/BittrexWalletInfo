@@ -97,6 +97,7 @@ public class SettingsFragment extends FragmentPattern {
                 final EditText input = new EditText(getActivity());
 // Specify the type of input expected; this, for example, sets the input as a password, and will mask the text
                 input.setInputType(InputType.TYPE_CLASS_NUMBER);
+                input.setHint("Input number (seconds)");
                 builder.setView(input);
 
 // Set up the buttons
@@ -121,19 +122,20 @@ public class SettingsFragment extends FragmentPattern {
             @Override
             public void onClick(View v) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                builder.setTitle("Delta Percent");
+                builder.setTitle("Percent Change");
 
 // Set up the input
                 final EditText input = new EditText(getActivity());
+                input.setHint("Input minimum % change to notify");
 // Specify the type of input expected; this, for example, sets the input as a password, and will mask the text
-                input.setInputType(InputType.TYPE_NUMBER_FLAG_DECIMAL);
+                input.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL | InputType.TYPE_NUMBER_FLAG_SIGNED);
                 builder.setView(input);
 
 // Set up the buttons
                 builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        sharedPreference.saveDeltaPercent(Float.parseFloat(input.getText().toString()));
+                        sharedPreference.saveDeltaPercent(Math.abs(Float.parseFloat(input.getText().toString())));
                     }
                 });
                 builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -188,7 +190,12 @@ public class SettingsFragment extends FragmentPattern {
         LinearLayoutManager mManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         rcvSettings.setLayoutManager(mManager);
         rcvSettings.setAdapter(settingsAdapter);
-        loadNewsList();
+        if(marketList == null){
+            loadNewsList();
+        }else {
+            settingsAdapter.setDataSource(ArrayConvert.toObjectArray(marketList));
+        }
+
     }
 
     @SuppressLint("StaticFieldLeak")
@@ -211,5 +218,11 @@ public class SettingsFragment extends FragmentPattern {
                 settingsAdapter.setDataSource(ArrayConvert.toObjectArray(marketList));
             }
         }.execute();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        loadNewsList();
     }
 }

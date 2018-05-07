@@ -19,6 +19,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import PACore.Process.ProgressAsyncTask;
+import PACore.Utilities.ArrayConvert;
 import PACore.View.FragmentPattern;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -46,6 +47,10 @@ public class WalletFragment extends FragmentPattern {
     TextView txtEstValue;
     BalanceAdapter balanceAdapter;
     SharedPreference sharedPreference;
+    List<Balance> balanceAvailableList;
+    Bittrex bittrex;
+    Gson gson = new Gson();
+    Ticker tickerUsdt;
     public WalletFragment() {
     }
 
@@ -67,73 +72,72 @@ public class WalletFragment extends FragmentPattern {
     @SuppressLint("StaticFieldLeak")
     public void InitData(){
         sharedPreference = new SharedPreference(getContext());
-
-        balanceAdapter = new BalanceAdapter(getContext(),new ArrayList<>());
         rcvBalance.setHasFixedSize(false);
-
         LinearLayoutManager mManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         rcvBalance.setLayoutManager(mManager);
-        rcvBalance.setAdapter(balanceAdapter);
-        //createNotification("Your Balance",String.format("%1$,.8f "+balanceAvailableList.get(0).getCurrency(), balanceAvailableList.get(0).getBalance()));
+
+        if(balanceAvailableList == null){
+            balanceAdapter = new BalanceAdapter(this,new ArrayList<>());
+            loadNewData();
+            rcvBalance.setAdapter(balanceAdapter);
+        }else {
+            new ProgressAsyncTask(getContext()) {
+
+                @Override
+                public void onDoing() {
+                    String tickerUsdtJson = bittrex.getTicker("USDT-BTC");
+                    tickerUsdt = gson.fromJson(tickerUsdtJson, GetTickerContainer.class).getTicker();
+                    System.out.println(tickerUsdt.getLast());
+                    balanceAdapter.setBtcPrice(tickerUsdt.getLast());
+                    balanceAdapter.setBittrex(bittrex);
+                }
+
+                @Override
+                public void onTaskComplete(Void aVoid) {
+                    balanceAdapter.setDataSource(ArrayConvert.toObjectArray(balanceAvailableList));
+                    rcvBalance.setAdapter(balanceAdapter);
+                }
+            }.execute();
+        }
+
+
+    }
+
+    public void updateEstValue(String sumBtc,String sumUsd){
+        txtEstValue.setText("Estimated Value: "+sumBtc+" / "+sumUsd);
+    }
+
+
+    @SuppressLint("StaticFieldLeak")
+    public void loadNewData(){
         new ProgressAsyncTask(getContext()) {
-            Bittrex bittrex;
-            double sumBtc = 0;
-            double sumUsd = 0;
-            List<Balance> balanceAvailableList;
             List<Balance> balanceList;
             @Override
             public void onDoing() {
                 bittrex =  localDataService.GetBittrexAPI(getActivity());
-                Gson gson = new Gson();
+
                 String balanceJson = bittrex.getBalances();
                 String tickerUsdtJson = bittrex.getTicker("USDT-BTC");
-                Ticker tickerUsdt = gson.fromJson(tickerUsdtJson, GetTickerContainer.class).getTicker();
+                tickerUsdt = gson.fromJson(tickerUsdtJson, GetTickerContainer.class).getTicker();
                 System.out.println(tickerUsdt.getLast());
                 balanceList = gson.fromJson(balanceJson, GetBalancesContainer.class).getBalances();
                 balanceAvailableList = new ArrayList<Balance>();
                 balanceAdapter.setBtcPrice(tickerUsdt.getLast());
                 balanceAdapter.setBittrex(bittrex);
+
                 balanceAdapter.clearDataSource();
-
                 for (Balance balance:balanceList) {
+
                     if(balance.getBalance() != 0) {
-                        String tickerCurrencyJson = bittrex.getTicker("BTC-" + balance.getCurrency());
-                        if (!balance.getCurrency().equals("BTC") && tickerCurrencyJson != null) {
-                            Ticker tickerCurrency = gson.fromJson(tickerCurrencyJson, GetTickerContainer.class).getTicker();
-
-                            double estBtc = tickerCurrency.getLast() * balance.getBalance();
-                            double estUsdt = estBtc * tickerUsdt.getLast();
-                            sumBtc+=estBtc;
-                            sumUsd+=estUsdt;
-                        }else  if(balance.getCurrency().equals("USDT")){
-                            double estUsdt = balance.getBalance();
-                            sumUsd+=estUsdt;
-                            sumBtc+= (balance.getBalance()/tickerUsdt.getLast());
-                        }else if(balance.getCurrency().equals("BTCP")){
-
-                        }else if(balance.getCurrency().equals("BTC")){
-                            Log.e("Currency: ",balance.getCurrency());
-                            sumBtc+=balance.getBalance();
-                            double estUsdt = balance.getBalance() * tickerUsdt.getLast();
-                            sumUsd+=estUsdt;
-                        }
-
+                        balanceAdapter.getDataSource().add(balance);
+                        balanceAvailableList.add(balance);
                     }
                 }
             }
 
             @Override
             public void onTaskComplete(Void aVoid) {
-                for (Balance balance:balanceList) {
-                    if(balance.getBalance() != 0) {
-                        balanceAvailableList.add(balance);
-                        balanceAdapter.addDataSource(balance);
-                    }
-                }
-                String btc = String.format("%1$,.8f BTC", sumBtc);
-                String usd =String.format("%1$,.2f USD", sumUsd);
-                txtEstValue.setText("Estimated Value: "+btc+" / "+usd);
-                System.out.println("Sum USD :"+sumUsd);
+                balanceAdapter.notifyDataSetChanged();
             }
         }.execute();
     }

@@ -9,7 +9,12 @@ import android.widget.TextView;
 
 import com.google.gson.Gson;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Locale;
 
 import PACore.View.RecycleViewAdapterPattern;
 import PACore.View.ViewHolderPattern;
@@ -47,7 +52,9 @@ public class CryptoEventAdapter extends RecycleViewAdapterPattern {
         eventsViewHolder.txtCaption.setText(cryptoEvent.getCaption());
         eventsViewHolder.txtCoinName.setText(cryptoEvent.getCoinName());
         eventsViewHolder.txtCoinSymbol.setText(cryptoEvent.getCoinSymbol());
-        eventsViewHolder.txtPublicDate.setText(cryptoEvent.getPublicDate());
+
+
+        eventsViewHolder.txtPublicDate.setText(cryptoEvent.getStartDate());
     }
 
     class EventsViewHolder extends ViewHolderPattern {

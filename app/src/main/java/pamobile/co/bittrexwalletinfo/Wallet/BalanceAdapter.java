@@ -35,6 +35,16 @@ public class BalanceAdapter extends RecycleViewAdapterPattern {
 
     double btc_usdt_price = 0.0;
     Bittrex bittrex;
+    double sumBtc = 0;
+    double sumUsd = 0;
+    WalletFragment walletFragment;
+
+    @Override
+    public void setDataSource(ArrayList<Object> dataSource) {
+        sumBtc = 0;
+        sumUsd = 0;
+        super.setDataSource(dataSource);
+    }
 
     public double getBtcPrice() {
         return btc_usdt_price;
@@ -54,6 +64,10 @@ public class BalanceAdapter extends RecycleViewAdapterPattern {
 
     public BalanceAdapter(Context mContext, ArrayList<Object> dataSource) {
         super(mContext, dataSource);
+    }
+    public BalanceAdapter(WalletFragment mContext, ArrayList<Object> dataSource) {
+        super(mContext.getContext(), dataSource);
+        this.walletFragment = mContext;
     }
 
     @Override
@@ -80,6 +94,8 @@ public class BalanceAdapter extends RecycleViewAdapterPattern {
 
             double estBtc = ticker.getLast() *  balance.getBalance();
             double estUsdt = estBtc*getBtcPrice();
+            sumBtc+=estBtc;
+            sumUsd+=estUsdt;
             balanceViewHolder.txtEstUsdt.setText(String.format("%1$,.2f USD",estUsdt));
             if(estUsdt<0.01){
                 balanceViewHolder.txtEstUsdt.setText("< 0.01 USD");
@@ -87,6 +103,8 @@ public class BalanceAdapter extends RecycleViewAdapterPattern {
 
         }else if(balance.getCurrency().equals("USDT")){
             double estUsdt = balance.getBalance();
+            sumUsd+=estUsdt;
+            sumBtc+= (balance.getBalance()/getBtcPrice());
             balanceViewHolder.txtEstUsdt.setText(String.format("%1$,.2f USD",estUsdt));
             if(estUsdt<0.01){
                 balanceViewHolder.txtEstUsdt.setText("< 0.01 USD");
@@ -94,14 +112,19 @@ public class BalanceAdapter extends RecycleViewAdapterPattern {
         }else if(balance.getCurrency().equals("BTCP")){
 
         }else if(balance.getCurrency().equals("BTC")){
+            sumBtc+=balance.getBalance();
             double estUsdt = balance.getBalance()*getBtcPrice();
+            sumUsd+=estUsdt;
             balanceViewHolder.txtEstUsdt.setText(String.format("%1$,.2f USD",estUsdt));
             if(estUsdt<0.01){
                 balanceViewHolder.txtEstUsdt.setText("< 0.01 USD");
             }
 
         }
+        String btc = String.format("%1$,.8f BTC", sumBtc);
+        String usd =String.format("%1$,.2f USD", sumUsd);
 
+        walletFragment.updateEstValue(btc,usd);
     }
 
     class BalanceViewHolder extends ViewHolderPattern {
